@@ -195,6 +195,17 @@ export const pl: TranslationStructure = {
         showFlavorIconsDescription: 'Wyświetlaj ikony dostawcy AI na awatarach sesji',
         compactSessionView: 'Kompaktowy widok sesji',
         compactSessionViewDescription: 'Pokazuj aktywne sesje w bardziej zwartym układzie',
+        uiStyle: 'Styl interfejsu',
+        uiStyleLabel: 'Wyświetlanie wiadomości',
+        uiStyleDescription: 'Wybierz sposób wyświetlania wiadomości w sesjach',
+        uiStyleOptions: {
+            default: 'Dymki czatu',
+            sshTerminal: 'Terminal SSH',
+        },
+        uiStyleDescriptions: {
+            default: 'Nowoczesny interfejs dymków czatu',
+            sshTerminal: 'Klasyczny interfejs wiersza poleceń',
+        },
     },
 
     settingsFeatures: {

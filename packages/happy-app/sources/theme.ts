@@ -234,6 +234,22 @@ export const lightTheme = {
             emptyOutput: '#6272A4',
         },
 
+        // SSH Terminal UI mode colors (dark background even in light theme)
+        // Based on Mac Terminal "Pro" theme with ANSI color palette
+        sshTerminal: {
+            background: '#1A1A2E',       // Deep dark indigo (Pro-inspired)
+            text: '#33DE5A',             // Softer green (easier on eyes than pure #00FF41)
+            textDim: '#5A8A65',          // Muted sage for thinking/secondary text
+            prompt: '#33DE5A',           // Prompt matches main green
+            userInput: '#D4D4D8',        // Slightly warm white (less harsh than pure white)
+            systemPrefix: '#E5C07B',     // Warm amber (ANSI yellow, not gold)
+            systemEvent: '#7F848E',      // Neutral gray for events
+            error: '#E06C75',            // Soft terminal red (One Dark inspired)
+            toolName: '#61AFEF',         // ANSI bright blue (clear, readable)
+            separator: '#3B3B50',        // Subtle indigo separator
+            cursor: '#33DE5A',           // Cursor matches prompt green
+        },
+
     },
 
     ...sharedSpacing,
@@ -442,6 +458,22 @@ export const darkTheme = {
             stderr: '#FFB86C',
             error: '#FF6B6B',
             emptyOutput: '#7B7B93',
+        },
+
+        // SSH Terminal UI mode colors (classic green-on-black)
+        // Based on Mac Terminal "Homebrew" theme with ANSI color palette
+        sshTerminal: {
+            background: '#0A0E14',       // Near-black with subtle blue undertone
+            text: '#28C940',             // Mac Terminal Homebrew green (authentic)
+            textDim: '#4D7A56',          // Muted forest green for thinking text
+            prompt: '#28C940',           // Prompt matches Homebrew green
+            userInput: '#E6E6E6',        // Soft white (matches real terminal default)
+            systemPrefix: '#D19A66',     // Warm muted amber (ANSI yellow)
+            systemEvent: '#636D83',      // Subtle blue-gray for events
+            error: '#E06C75',            // Soft terminal red
+            toolName: '#56B6C2',         // ANSI cyan (distinct from green, very readable)
+            separator: '#1E2430',        // Dark blue-gray separator
+            cursor: '#28C940',           // Cursor matches Homebrew green
         },
 
     },

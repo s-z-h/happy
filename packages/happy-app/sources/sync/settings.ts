@@ -288,6 +288,8 @@ export const SettingsSchema = z.object({
     favoriteDirectories: z.array(z.string()).describe('User-defined favorite directories for quick access in path selection'),
     // Favorite machines for quick machine selection
     favoriteMachines: z.array(z.string()).describe('User-defined favorite machines (machine IDs) for quick access in machine selection'),
+    // UI display style: default chat bubbles or SSH terminal mode
+    uiStyle: z.enum(['default', 'ssh-terminal']).default('default').describe('Message display style: default bubble UI or SSH terminal style'),
     // Dismissed CLI warning banners (supports both per-machine and global dismissal)
     dismissedCLIWarnings: z.object({
         perMachine: z.record(z.string(), z.object({
@@ -354,6 +356,8 @@ export const settingsDefaults: Settings = {
     favoriteDirectories: ['~/src', '~/Desktop', '~/Documents'],
     // Favorite machines (empty by default)
     favoriteMachines: [],
+    // UI display style
+    uiStyle: 'default' as const,
     // Dismissed CLI warnings (empty by default)
     dismissedCLIWarnings: { perMachine: {}, global: {} },
 };

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useSession, useSessionMessages } from "@/sync/storage";
+import { useSession, useSessionMessages, useSetting } from "@/sync/storage";
 import { ActivityIndicator, FlatList, Platform, View } from 'react-native';
 import { useCallback } from 'react';
 import { useHeaderHeight } from '@/utils/responsive';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useUnistyles } from 'react-native-unistyles';
 import { MessageView } from './MessageView';
 import { Metadata, Session } from '@/sync/storageTypes';
 import { ChatFooter } from './ChatFooter';
@@ -38,12 +39,16 @@ const ChatListInternal = React.memo((props: {
     sessionId: string,
     messages: Message[],
 }) => {
+    const { theme } = useUnistyles();
+    const uiStyle = useSetting('uiStyle');
+    const isSSH = uiStyle === 'ssh-terminal';
     const keyExtractor = useCallback((item: any) => item.id, []);
     const renderItem = useCallback(({ item }: { item: any }) => (
         <MessageView message={item} metadata={props.metadata} sessionId={props.sessionId} />
     ), [props.metadata, props.sessionId]);
     return (
         <FlatList
+            style={isSSH ? { backgroundColor: theme.colors.sshTerminal.background } : undefined}
             data={props.messages}
             inverted={true}
             keyExtractor={keyExtractor}

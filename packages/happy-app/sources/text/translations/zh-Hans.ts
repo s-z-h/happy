@@ -186,6 +186,17 @@ export const zhHans: TranslationStructure = {
         showFlavorIconsDescription: '在会话头像上显示 AI 提供商图标',
         compactSessionView: '紧凑会话视图',
         compactSessionViewDescription: '以更紧凑的布局显示活跃会话',
+        uiStyle: 'UI 风格',
+        uiStyleLabel: '消息显示',
+        uiStyleDescription: '选择会话中消息的显示方式',
+        uiStyleOptions: {
+            default: '聊天气泡',
+            sshTerminal: 'SSH 终端',
+        },
+        uiStyleDescriptions: {
+            default: '现代聊天气泡界面',
+            sshTerminal: '经典终端命令行界面',
+        },
     },
 
     settingsFeatures: {

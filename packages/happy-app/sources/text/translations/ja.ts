@@ -216,6 +216,17 @@ export const ja: TranslationStructure = {
         showFlavorIconsDescription: 'セッションアバターにAIプロバイダーアイコンを表示',
         compactSessionView: 'コンパクトセッション表示',
         compactSessionViewDescription: 'アクティブなセッションをコンパクトなレイアウトで表示',
+        uiStyle: 'UIスタイル',
+        uiStyleLabel: 'メッセージ表示',
+        uiStyleDescription: 'セッションでのメッセージの表示方法を選択',
+        uiStyleOptions: {
+            default: 'チャットバブル',
+            sshTerminal: 'SSHターミナル',
+        },
+        uiStyleDescriptions: {
+            default: 'モダンなチャットバブルインターフェース',
+            sshTerminal: 'クラシックなターミナルコマンドラインインターフェース',
+        },
     },
 
     settingsFeatures: {

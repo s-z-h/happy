@@ -166,6 +166,17 @@ export const ru: TranslationStructure = {
         showFlavorIconsDescription: 'Отображать иконки провайдеров ИИ на аватарах сессий',
         compactSessionView: 'Компактный вид сессий',
         compactSessionViewDescription: 'Отображать активные сессии в более компактном виде',
+        uiStyle: 'Стиль интерфейса',
+        uiStyleLabel: 'Отображение сообщений',
+        uiStyleDescription: 'Выберите способ отображения сообщений в сессиях',
+        uiStyleOptions: {
+            default: 'Чат-пузыри',
+            sshTerminal: 'SSH терминал',
+        },
+        uiStyleDescriptions: {
+            default: 'Современный интерфейс с пузырями сообщений',
+            sshTerminal: 'Классический интерфейс командной строки',
+        },
     },
 
     settingsFeatures: {

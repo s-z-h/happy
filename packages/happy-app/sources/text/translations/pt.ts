@@ -184,6 +184,17 @@ export const pt: TranslationStructure = {
         showFlavorIconsDescription: 'Exibir ícones do provedor de IA nos avatares de sessão',
         compactSessionView: 'Visualização compacta de sessões',
         compactSessionViewDescription: 'Mostrar sessões ativas em um layout mais compacto',
+        uiStyle: 'Estilo de UI',
+        uiStyleLabel: 'Exibição de mensagens',
+        uiStyleDescription: 'Escolha como as mensagens são exibidas nas sessões',
+        uiStyleOptions: {
+            default: 'Balões de chat',
+            sshTerminal: 'Terminal SSH',
+        },
+        uiStyleDescriptions: {
+            default: 'Interface moderna de balões de chat',
+            sshTerminal: 'Interface clássica de linha de comando',
+        },
     },
 
     settingsFeatures: {

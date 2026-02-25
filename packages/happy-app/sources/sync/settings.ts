@@ -290,6 +290,8 @@ export const SettingsSchema = z.object({
     favoriteMachines: z.array(z.string()).describe('User-defined favorite machines (machine IDs) for quick access in machine selection'),
     // UI display style: default chat bubbles or SSH terminal mode
     uiStyle: z.enum(['default', 'ssh-terminal']).default('default').describe('Message display style: default bubble UI or SSH terminal style'),
+    // Session grouping mode: by date or by device/machine
+    sessionGrouping: z.enum(['date', 'device']).default('date').describe('How inactive sessions are grouped: by date or by device/machine'),
     // Dismissed CLI warning banners (supports both per-machine and global dismissal)
     dismissedCLIWarnings: z.object({
         perMachine: z.record(z.string(), z.object({
@@ -358,6 +360,8 @@ export const settingsDefaults: Settings = {
     favoriteMachines: [],
     // UI display style
     uiStyle: 'default' as const,
+    // Session grouping mode
+    sessionGrouping: 'date' as const,
     // Dismissed CLI warnings (empty by default)
     dismissedCLIWarnings: { perMachine: {}, global: {} },
 };

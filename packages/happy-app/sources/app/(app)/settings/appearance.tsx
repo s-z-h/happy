@@ -31,6 +31,7 @@ export default function AppearanceSettingsScreen() {
     const [avatarStyle, setAvatarStyle] = useSettingMutable('avatarStyle');
     const [showFlavorIcons, setShowFlavorIcons] = useSettingMutable('showFlavorIcons');
     const [compactSessionView, setCompactSessionView] = useSettingMutable('compactSessionView');
+    const [sessionGrouping, setSessionGrouping] = useSettingMutable('sessionGrouping');
     const [uiStyle, setUiStyle] = useSettingMutable('uiStyle');
     const [themePreference, setThemePreference] = useLocalSettingMutable('themePreference');
     const [preferredLanguage] = useSettingMutable('preferredLanguage');
@@ -146,6 +147,17 @@ export default function AppearanceSettingsScreen() {
                             onValueChange={setCompactSessionView}
                         />
                     }
+                />
+                <Item
+                    title={t('settingsAppearance.sessionGrouping')}
+                    subtitle={t('settingsAppearance.sessionGroupingDescription')}
+                    icon={<Ionicons name="desktop-outline" size={29} color="#5856D6" />}
+                    detail={sessionGrouping === 'date'
+                        ? t('settingsAppearance.sessionGroupingDate')
+                        : t('settingsAppearance.sessionGroupingDevice')}
+                    onPress={() => {
+                        setSessionGrouping(sessionGrouping === 'date' ? 'device' : 'date');
+                    }}
                 />
                 <Item
                     title={t('settingsAppearance.inlineToolCalls')}

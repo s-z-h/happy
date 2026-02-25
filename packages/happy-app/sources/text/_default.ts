@@ -183,6 +183,21 @@ export const en = {
         showFlavorIconsDescription: 'Display AI provider icons on session avatars',
         compactSessionView: 'Compact Session View',
         compactSessionViewDescription: 'Show active sessions in a more compact layout',
+        sessionGrouping: 'Session Grouping',
+        sessionGroupingDescription: 'Choose how inactive sessions are organized',
+        sessionGroupingDate: 'By Date',
+        sessionGroupingDevice: 'By Device',
+        uiStyle: 'UI Style',
+        uiStyleLabel: 'Message Display',
+        uiStyleDescription: 'Choose how messages are displayed in sessions',
+        uiStyleOptions: {
+            default: 'Chat Bubbles',
+            sshTerminal: 'SSH Terminal',
+        },
+        uiStyleDescriptions: {
+            default: 'Modern chat bubble interface',
+            sshTerminal: 'Classic terminal command-line interface',
+        },
     },
 
     settingsFeatures: {

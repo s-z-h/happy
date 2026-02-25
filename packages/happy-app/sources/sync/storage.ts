@@ -150,7 +150,9 @@ interface StorageState {
 
 // Helper function to build unified list view data from sessions and machines
 function buildSessionListViewData(
-    sessions: Record<string, Session>
+    sessions: Record<string, Session>,
+    grouping: 'date' | 'device' = 'date',
+    machines: Record<string, Machine> = {}
 ): SessionListViewItem[] {
     // Separate active and inactive sessions
     const activeSessions: Session[] = [];
@@ -176,7 +178,43 @@ function buildSessionListViewData(
         listData.push({ type: 'active-sessions', sessions: activeSessions });
     }
 
-    // Group inactive sessions by date
+    if (grouping === 'device') {
+        // Group inactive sessions by device/machine
+        const machineGroups = new Map<string, { machine: Machine | null; sessions: Session[] }>();
+
+        for (const session of inactiveSessions) {
+            const machineId = session.metadata?.machineId || 'unknown';
+            let group = machineGroups.get(machineId);
+            if (!group) {
+                group = { machine: machines[machineId] ?? null, sessions: [] };
+                machineGroups.set(machineId, group);
+            }
+            group.sessions.push(session);
+        }
+
+        // Sort: named machines first (alphabetical), unknown last
+        const sortedGroups = Array.from(machineGroups.entries()).sort(([idA, a], [idB, b]) => {
+            if (idA === 'unknown') return 1;
+            if (idB === 'unknown') return -1;
+            const nameA = a.machine?.metadata?.displayName || a.machine?.metadata?.host || idA;
+            const nameB = b.machine?.metadata?.displayName || b.machine?.metadata?.host || idB;
+            return nameA.localeCompare(nameB);
+        });
+
+        for (const [machineId, group] of sortedGroups) {
+            const title = group.machine?.metadata?.displayName
+                || group.machine?.metadata?.host
+                || (machineId === 'unknown' ? 'Unknown Device' : machineId);
+            listData.push({ type: 'header', title });
+            for (const session of group.sessions) {
+                listData.push({ type: 'session', session });
+            }
+        }
+
+        return listData;
+    }
+
+    // Group inactive sessions by date (default)
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
@@ -449,7 +487,7 @@ export const storage = create<StorageState>()((set, get) => {
 
             // Build new unified list view data
             const sessionListViewData = buildSessionListViewData(
-                mergedSessions
+                mergedSessions, state.settings.sessionGrouping, state.machines
             );
 
             // Update project manager with current sessions and machines
@@ -628,19 +666,37 @@ export const storage = create<StorageState>()((set, get) => {
             return result;
         }),
         applySettingsLocal: (settings: Partial<Settings>) => set((state) => {
-            saveSettings(applySettings(state.settings, settings), state.settingsVersion ?? 0);
+            const newSettings = applySettings(state.settings, settings);
+            saveSettings(newSettings, state.settingsVersion ?? 0);
+
+            // Rebuild session list if grouping mode changed
+            const needsRebuild = 'sessionGrouping' in settings &&
+                settings.sessionGrouping !== state.settings.sessionGrouping;
+            const sessionListViewData = needsRebuild
+                ? buildSessionListViewData(state.sessions, newSettings.sessionGrouping, state.machines)
+                : state.sessionListViewData;
+
             return {
                 ...state,
-                settings: applySettings(state.settings, settings)
+                settings: newSettings,
+                sessionListViewData
             };
         }),
         applySettings: (settings: Settings, version: number) => set((state) => {
             if (state.settingsVersion === null || state.settingsVersion < version) {
                 saveSettings(settings, version);
+
+                // Rebuild session list if grouping mode changed
+                const needsRebuild = settings.sessionGrouping !== state.settings.sessionGrouping;
+                const sessionListViewData = needsRebuild
+                    ? buildSessionListViewData(state.sessions, settings.sessionGrouping, state.machines)
+                    : state.sessionListViewData;
+
                 return {
                     ...state,
                     settings,
-                    settingsVersion: version
+                    settingsVersion: version,
+                    sessionListViewData
                 };
             } else {
                 return state;
@@ -768,7 +824,7 @@ export const storage = create<StorageState>()((set, get) => {
 
             // Rebuild sessionListViewData to update the UI immediately
             const sessionListViewData = buildSessionListViewData(
-                updatedSessions
+                updatedSessions, state.settings.sessionGrouping, state.machines
             );
 
             return {
@@ -859,7 +915,7 @@ export const storage = create<StorageState>()((set, get) => {
 
             // Rebuild sessionListViewData to reflect machine changes
             const sessionListViewData = buildSessionListViewData(
-                state.sessions
+                state.sessions, state.settings.sessionGrouping, mergedMachines
             );
 
             return {
@@ -932,7 +988,7 @@ export const storage = create<StorageState>()((set, get) => {
             saveSessionPermissionModes(modes);
             
             // Rebuild sessionListViewData without the deleted session
-            const sessionListViewData = buildSessionListViewData(remainingSessions);
+            const sessionListViewData = buildSessionListViewData(remainingSessions, state.settings.sessionGrouping, state.machines);
             
             return {
                 ...state,

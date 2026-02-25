@@ -36,6 +36,7 @@ export async function startApi() {
     const app = fastify({
         loggerInstance: logger,
         bodyLimit: 1024 * 1024 * 100, // 100MB
+        trustProxy: true,
     });
     app.register(import('@fastify/cors'), {
         origin: '*',

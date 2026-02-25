@@ -9,7 +9,7 @@ import { buildNewMachineUpdate, buildUpdateMachineUpdate } from "@/app/events/ev
 
 export function machinesRoutes(app: Fastify) {
     app.post('/v1/machines', {
-        preHandler: app.authenticate,
+        preHandler: [app.cliIpCheck, app.authenticate],
         schema: {
             body: z.object({
                 id: z.string(),
@@ -110,7 +110,7 @@ export function machinesRoutes(app: Fastify) {
 
     // Machines API
     app.get('/v1/machines', {
-        preHandler: app.authenticate,
+        preHandler: [app.cliIpCheck, app.authenticate],
     }, async (request, reply) => {
         const userId = request.userId;
 
@@ -136,7 +136,7 @@ export function machinesRoutes(app: Fastify) {
 
     // GET /v1/machines/:id - Get single machine by ID
     app.get('/v1/machines/:id', {
-        preHandler: app.authenticate,
+        preHandler: [app.cliIpCheck, app.authenticate],
         schema: {
             params: z.object({
                 id: z.string()

@@ -18,6 +18,7 @@ import { accessKeysRoutes } from "./routes/accessKeysRoutes";
 import { enableMonitoring } from "./utils/enableMonitoring";
 import { enableErrorHandlers } from "./utils/enableErrorHandlers";
 import { enableAuthentication } from "./utils/enableAuthentication";
+import { enableCliIpWhitelist } from "./utils/enableCliIpWhitelist";
 import { userRoutes } from "./routes/userRoutes";
 import { feedRoutes } from "./routes/feedRoutes";
 import { kvRoutes } from "./routes/kvRoutes";
@@ -54,6 +55,7 @@ export async function startApi() {
     enableMonitoring(typed);
     enableErrorHandlers(typed);
     enableAuthentication(typed);
+    enableCliIpWhitelist(typed);
 
     // Serve local files when using local storage
     if (isLocalStorage()) {

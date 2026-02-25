@@ -7,6 +7,7 @@ import { log } from "@/utils/log";
 
 export function authRoutes(app: Fastify) {
     app.post('/v1/auth', {
+        preHandler: app.cliIpCheck,
         schema: {
             body: z.object({
                 publicKey: z.string(),
@@ -39,6 +40,7 @@ export function authRoutes(app: Fastify) {
     });
 
     app.post('/v1/auth/request', {
+        preHandler: app.cliIpCheck,
         schema: {
             body: z.object({
                 publicKey: z.string(),
@@ -88,6 +90,7 @@ export function authRoutes(app: Fastify) {
 
     // Get auth request status
     app.get('/v1/auth/request/status', {
+        preHandler: app.cliIpCheck,
         schema: {
             querystring: z.object({
                 publicKey: z.string(),
@@ -167,6 +170,7 @@ export function authRoutes(app: Fastify) {
 
     // Account auth request
     app.post('/v1/auth/account/request', {
+        preHandler: app.cliIpCheck,
         schema: {
             body: z.object({
                 publicKey: z.string(),

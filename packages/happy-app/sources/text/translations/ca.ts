@@ -184,6 +184,17 @@ export const ca: TranslationStructure = {
         showFlavorIconsDescription: "Mostrar icones del proveïdor d'IA als avatars de sessió",
         compactSessionView: 'Vista compacta de sessions',
         compactSessionViewDescription: 'Mostra les sessions actives en un disseny més compacte',
+        uiStyle: "Estil d'interfície",
+        uiStyleLabel: 'Visualització de missatges',
+        uiStyleDescription: 'Tria com es mostren els missatges a les sessions',
+        uiStyleOptions: {
+            default: 'Bombolles de xat',
+            sshTerminal: 'Terminal SSH',
+        },
+        uiStyleDescriptions: {
+            default: 'Interfície moderna de bombolles de xat',
+            sshTerminal: 'Interfície clàssica de línia de comandes',
+        },
     },
 
     settingsFeatures: {

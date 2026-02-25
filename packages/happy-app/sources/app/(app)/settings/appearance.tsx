@@ -31,6 +31,7 @@ export default function AppearanceSettingsScreen() {
     const [avatarStyle, setAvatarStyle] = useSettingMutable('avatarStyle');
     const [showFlavorIcons, setShowFlavorIcons] = useSettingMutable('showFlavorIcons');
     const [compactSessionView, setCompactSessionView] = useSettingMutable('compactSessionView');
+    const [uiStyle, setUiStyle] = useSettingMutable('uiStyle');
     const [themePreference, setThemePreference] = useLocalSettingMutable('themePreference');
     const [preferredLanguage] = useSettingMutable('preferredLanguage');
     
@@ -85,6 +86,20 @@ export default function AppearanceSettingsScreen() {
                             UnistylesRuntime.setRootViewBackgroundColor(color);
                             SystemUI.setBackgroundColorAsync(color);
                         }
+                    }}
+                />
+            </ItemGroup>
+
+            {/* UI Style Settings */}
+            <ItemGroup title={t('settingsAppearance.uiStyle')} footer={t('settingsAppearance.uiStyleDescription')}>
+                <Item
+                    title={t('settingsAppearance.uiStyleLabel')}
+                    subtitle={uiStyle === 'default' ? t('settingsAppearance.uiStyleDescriptions.default') : t('settingsAppearance.uiStyleDescriptions.sshTerminal')}
+                    icon={<Ionicons name="terminal-outline" size={29} color="#00CC33" />}
+                    detail={uiStyle === 'default' ? t('settingsAppearance.uiStyleOptions.default') : t('settingsAppearance.uiStyleOptions.sshTerminal')}
+                    onPress={() => {
+                        const nextStyle = uiStyle === 'default' ? 'ssh-terminal' : 'default';
+                        setUiStyle(nextStyle);
                     }}
                 />
             </ItemGroup>

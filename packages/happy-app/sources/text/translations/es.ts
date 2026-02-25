@@ -184,6 +184,17 @@ export const es: TranslationStructure = {
         showFlavorIconsDescription: 'Mostrar íconos del proveedor de IA en los avatares de sesión',
         compactSessionView: 'Vista compacta de sesiones',
         compactSessionViewDescription: 'Mostrar sesiones activas en un diseño más compacto',
+        uiStyle: 'Estilo de UI',
+        uiStyleLabel: 'Visualización de mensajes',
+        uiStyleDescription: 'Elige cómo se muestran los mensajes en las sesiones',
+        uiStyleOptions: {
+            default: 'Burbujas de chat',
+            sshTerminal: 'Terminal SSH',
+        },
+        uiStyleDescriptions: {
+            default: 'Interfaz moderna de burbujas de chat',
+            sshTerminal: 'Interfaz clásica de línea de comandos',
+        },
     },
 
     settingsFeatures: {

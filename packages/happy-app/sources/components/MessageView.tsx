@@ -11,6 +11,7 @@ import { AgentEvent } from "@/sync/typesRaw";
 import { sync } from '@/sync/sync';
 import { Option } from './markdown/MarkdownView';
 import { useSetting } from "@/sync/storage";
+import { SSHMessageView } from "./ssh/SSHMessageView";
 
 export const MessageView = (props: {
   message: Message;
@@ -18,6 +19,18 @@ export const MessageView = (props: {
   sessionId: string;
   getMessageById?: (id: string) => Message | null;
 }) => {
+  const uiStyle = useSetting('uiStyle');
+
+  if (uiStyle === 'ssh-terminal') {
+    return (
+      <SSHMessageView
+        message={props.message}
+        metadata={props.metadata}
+        sessionId={props.sessionId}
+      />
+    );
+  }
+
   return (
     <View style={styles.messageContainer} renderToHardwareTextureAndroid={true}>
       <View style={styles.messageContent}>

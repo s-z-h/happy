@@ -185,6 +185,17 @@ export const zhHant: TranslationStructure = {
         showFlavorIconsDescription: '在工作階段頭像上顯示 AI 提供者圖示',
         compactSessionView: '緊湊工作階段檢視',
         compactSessionViewDescription: '以更緊湊的版面配置顯示活躍工作階段',
+        uiStyle: 'UI 風格',
+        uiStyleLabel: '訊息顯示',
+        uiStyleDescription: '選擇工作階段中訊息的顯示方式',
+        uiStyleOptions: {
+            default: '聊天氣泡',
+            sshTerminal: 'SSH 終端',
+        },
+        uiStyleDescriptions: {
+            default: '現代聊天氣泡介面',
+            sshTerminal: '經典終端命令列介面',
+        },
     },
 
     settingsFeatures: {
